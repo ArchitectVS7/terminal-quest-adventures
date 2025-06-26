@@ -25,7 +25,7 @@ const TutorialStepper: React.FC<TutorialStepperProps> = ({
   const handleCommand = async (command: string) => {
     setIsExecuting(true);
     
-    // Add command to history
+    // Add command to history (fix: only show once)
     const commandLine = `user@terminal:~$ ${command}`;
     setTerminalHistory(prev => [...prev, commandLine]);
 
@@ -76,6 +76,11 @@ const TutorialStepper: React.FC<TutorialStepperProps> = ({
     }
   };
 
+  const handleSkipTutorial = () => {
+    // Mark all steps as completed and proceed to missions
+    onComplete();
+  };
+
   const toggleHint = () => {
     setShowHint(!showHint);
   };
@@ -108,13 +113,21 @@ const TutorialStepper: React.FC<TutorialStepperProps> = ({
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      {/* Progress Bar */}
+      {/* Progress Bar with Skip Button */}
       <div className="bg-neutral-800 rounded-lg p-4">
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-orbitron font-bold text-white">Tutorial Progress</h2>
-          <span className="text-sm text-gray-400">
-            {completedSteps.size} / {steps.length} completed
-          </span>
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-gray-400">
+              {completedSteps.size} / {steps.length} completed
+            </span>
+            <button
+              onClick={handleSkipTutorial}
+              className="text-sm text-gray-400 hover:text-white transition-colors px-3 py-1 border border-gray-600 rounded hover:border-gray-500"
+            >
+              Skip Tutorial
+            </button>
+          </div>
         </div>
         <div className="w-full bg-gray-700 rounded-full h-2">
           <div 
