@@ -1,94 +1,51 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Source+Code+Pro:wght@400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Terminal Quest Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 18 18 18; /* #121212 */
+    --foreground: 255 255 255; /* #ffffff */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 26 26 26; /* #1a1a1a */
+    --card-foreground: 255 255 255;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 26 26 26;
+    --popover-foreground: 255 255 255;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 57 255 20; /* #39FF14 */
+    --primary-foreground: 0 0 0;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 255 255; /* #00FFFF */
+    --secondary-foreground: 0 0 0;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 42 42 42; /* #2a2a2a */
+    --muted-foreground: 156 163 175; /* #9ca3af */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 57 255 20;
+    --accent-foreground: 0 0 0;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 42 42 42;
+    --input: 26 26 26;
+    --ring: 57 255 20;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 18 18 18;
+    --sidebar-foreground: 255 255 255;
+    --sidebar-primary: 57 255 20;
+    --sidebar-primary-foreground: 0 0 0;
+    --sidebar-accent: 26 26 26;
+    --sidebar-accent-foreground: 255 255 255;
+    --sidebar-border: 42 42 42;
+    --sidebar-ring: 57 255 20;
   }
 }
 
@@ -98,6 +55,90 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron;
+  }
+
+  /* Terminal-specific styles */
+  .terminal-window {
+    @apply bg-black border border-gray-600 rounded-lg overflow-hidden shadow-2xl;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+  }
+
+  .terminal-header {
+    @apply bg-gray-800 px-4 py-2 flex items-center space-x-2;
+  }
+
+  .terminal-button {
+    @apply w-3 h-3 rounded-full;
+  }
+
+  .terminal-content {
+    @apply p-4 font-mono text-sm min-h-[300px] max-h-[500px] overflow-y-auto;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  }
+
+  .terminal-prompt {
+    @apply text-terminal-green;
+  }
+
+  .terminal-cursor {
+    @apply inline-block w-2 h-5 bg-terminal-green animate-cursor-blink;
+  }
+
+  /* Cyber glow effects */
+  .cyber-glow {
+    @apply shadow-lg;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+  }
+
+  .cyber-glow-cyan {
+    @apply shadow-lg;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+
+  /* Scrollbar styling */
+  .terminal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .terminal-content::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  .terminal-content::-webkit-scrollbar-thumb {
+    background: #39FF14;
+    border-radius: 3px;
+  }
+
+  .terminal-content::-webkit-scrollbar-thumb:hover {
+    background: #2ECC71;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-terminal-green hover:bg-green-400 text-black font-bold py-2 px-4 rounded transition-all duration-200 cyber-glow;
+  }
+
+  .btn-secondary {
+    @apply bg-terminal-cyan hover:bg-cyan-400 text-black font-medium py-2 px-4 rounded transition-all duration-200 cyber-glow-cyan;
+  }
+
+  .mission-card {
+    @apply bg-neutral-800 shadow-md rounded-2xl p-6 border border-neutral-700 hover:border-terminal-green transition-all duration-300 hover:shadow-lg hover:shadow-terminal-green/20;
+  }
+
+  .form-input {
+    @apply bg-neutral-900 border border-neutral-700 rounded p-3 w-full font-mono text-white placeholder-neutral-400 focus:border-terminal-green focus:ring-1 focus:ring-terminal-green transition-colors;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-neutral-300 mb-2 font-orbitron;
   }
 }
