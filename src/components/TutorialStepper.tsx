@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { TutorialStep } from '@/lib/types';
 import TerminalPreview from './TerminalPreview';
@@ -25,9 +24,8 @@ const TutorialStepper: React.FC<TutorialStepperProps> = ({
   const handleCommand = async (command: string) => {
     setIsExecuting(true);
     
-    // Add command to history (fix: only show once)
-    const commandLine = `user@terminal:~$ ${command}`;
-    setTerminalHistory(prev => [...prev, commandLine]);
+    // Add only the command to history (let TerminalPreview handle the prompt)
+    setTerminalHistory(prev => [...prev, command]);
 
     // Simulate processing delay
     await new Promise(resolve => setTimeout(resolve, 500));
