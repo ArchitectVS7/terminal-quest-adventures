@@ -69,11 +69,33 @@ const TerminalPreview: React.FC<TerminalPreviewProps> = ({
       >
         {/* Command History */}
         <div className="space-y-1 mb-2">
-          {history.map((line, index) => (
-            <div key={index} className="text-gray-300 text-sm font-mono">
-              {line}
-            </div>
-          ))}
+          {history.map((line, index) => {
+            // Check if this line is a command (not a response)
+            const isCommand = !line.startsWith('Great!') && 
+                             !line.startsWith('Command') && 
+                             !line.startsWith('Welcome') && 
+                             !line.startsWith('🎉') &&
+                             !line.includes('correctly') &&
+                             !line.includes('not recognized');
+            
+            if (isCommand) {
+              return (
+                <div key={index} className="space-y-1">
+                  {/* Show command with prompt */}
+                  <div className="flex items-center">
+                    <span className="terminal-prompt text-sm">user@terminal:~$ </span>
+                    <span className="text-white ml-1 font-mono text-sm">{line}</span>
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <div key={index} className="text-gray-300 text-sm font-mono ml-2">
+                  {line}
+                </div>
+              );
+            }
+          })}
         </div>
 
         {/* Current Input Line */}
@@ -110,14 +132,6 @@ const TerminalPreview: React.FC<TerminalPreviewProps> = ({
             </div>
           )}
         </form>
-
-        {/* Cursor when not focused */}
-        {!currentInput && !isExecuting && (
-          <div className="flex items-center mt-1">
-            <span className="terminal-prompt text-sm">user@terminal:~$ </span>
-            <span className="terminal-cursor ml-1"></span>
-          </div>
-        )}
       </div>
     </div>
   );
